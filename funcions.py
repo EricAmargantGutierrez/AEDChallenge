@@ -258,3 +258,25 @@ def score_participant(p1: Participant, p2: Participant) -> int:
         score += 3  # Experience level match
         
     return score
+
+from collections import Counter
+
+def most_frequent_topic(text):
+    # Define keyword groups for each topic
+    topics = {
+        "prize-hunting": ["prize", "winning", "competition", "award", "victory", "reward", "contest"],
+        "portfolio-building": ["portfolio", "project", "resume", "career", "work", "showcase", "development"],
+        "learning new skills": ["learning", "skills", "knowledge", "training", "workshop", "growth", "improve"],
+        "meeting new people": ["meeting", "networking", "people", "friends", "connections", "socializing", "community"]
+    }
+    
+    # Normalize text (convert to lowercase)
+    text = text.lower()
+    
+    # Count occurrences of keywords in the text
+    keyword_counts = {topic: sum(text.count(word) for word in words) for topic, words in topics.items()}
+    
+    # Find the topic with the highest frequency
+    most_frequent = max(keyword_counts, key=keyword_counts.get)
+    
+    return most_frequent, keyword_counts  # Return the most frequent topic and counts for reference
